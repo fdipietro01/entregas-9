@@ -3,8 +3,8 @@ const urlCart = "../daos/carritos/carritosDao";
 
 
 const storages = ["Archivo", "Memoria", "MongoDb", "Firebase"];
-const db = process.env.PORT || "Memoria";
-
+const db = process.env.DATABASE || "Memoria";
+console.log(db, "db seteada por variable de entorno")
 let ProductosContenedor;
 let CarritoContenedor;
 
