@@ -18,17 +18,15 @@ export class Contenedor {
   }
 
   async save(element) {
-    this.asignadorDeId++;
-    element.id = this.asignadorDeId;
-    element.timestamp = Date().toLocaleString();
-    console.log(element)
     try {
+      this.asignadorDeId++;
+      element.id = this.asignadorDeId;
+      element.timestamp = Date().toLocaleString();
       const toAdd = new this.model(element);
       await toAdd.save();
       return element;
     } catch (err) {
       this.asignadorDeId--
-      console.log("the err", err);
       return;
     }
   }

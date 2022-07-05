@@ -1,8 +1,7 @@
-import express, { json } from "express";
+import express from "express";
 import routerP from "./routeProducto.js";
 import routerC from "./routeCarrito.js";
-import { Server as HttpServer } from "http";
-import { Server as SocketServer } from "socket.io"
+
 
 const app = express();
 app.use(express.static("public"));

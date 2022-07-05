@@ -11,6 +11,7 @@ export class Contenedor {
   }
 
   async save (element) {
+    try{
     const elements = JSON.parse(await fs.readFile(this.ruta))
     this.asignadorDeId ++
     !element.id && (element.id = this.asignadorDeId)
@@ -18,6 +19,11 @@ export class Contenedor {
     elements.push(element)
     await fs.writeFile(this.ruta, JSON.stringify(elements));
     return element;
+    }
+    catch(err){
+      this.asignadorDeId--
+      return;
+    }
   }
 
   async read(id) {

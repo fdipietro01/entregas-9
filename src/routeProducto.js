@@ -14,7 +14,6 @@ routerP.get("/:id?",async (req, res)=>{
 })
 
 routerP.post("/", authMiddle, async(req, res)=>{
-    console.log("entro")
     const item = req.body
     const itemChecked= await instanceProd.save(item)
     res.send(itemChecked? {itemAdded:itemChecked}: {Err:"producto no agregado"})

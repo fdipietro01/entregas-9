@@ -1,7 +1,7 @@
 const urlProd = "../daos/productos/productosDao";
 const urlCart = "../daos/carritos/carritosDao";
 
-const a = "MongoDb" //este seria el valor del .env
+const a = "Firebase" //este seria el valor del .env
 const storages = ["Archivo", "Memory", "MongoDb", "Firebase"];
 
 
