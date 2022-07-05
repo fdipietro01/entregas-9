@@ -1,6 +1,8 @@
 import express from "express";
 import routerP from "./routes/routeProducto.js";
 import routerC from "./routes/routeCarrito.js";
+import * as dotenv from 'dotenv'; 
+dotenv.config({path: './.env'})
 
 
 const app = express();

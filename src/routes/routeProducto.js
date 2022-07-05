@@ -1,5 +1,5 @@
 import express from "express";
-import authMiddle from "../authMiddleware.js"
+import authMiddle from "../middlewares/authMiddleware.js"
 import {instances} from "../daos/index.js"
 
 
