@@ -1,6 +1,6 @@
 import express from "express";
-import authMiddle from "./authMiddleware.js"
-import {instances} from "./daos/index.js";
+import authMiddle from "../authMiddleware.js"
+import {instances} from "../daos/index.js"
 
 
 const {instanceProd} = instances

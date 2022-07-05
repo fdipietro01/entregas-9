@@ -6,7 +6,6 @@ export class Contenedor {
   }
 
   async init () {
-    console.log("pasó por acá")
     await fs.writeFile(this.ruta, JSON.stringify([]));
   }
 

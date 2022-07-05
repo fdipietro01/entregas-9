@@ -1,5 +1,5 @@
 import express from "express";
-import {instances} from "./daos/index.js";
+import {instances} from "../daos/index.js";
 
 
 const {instanceCart} = instances
