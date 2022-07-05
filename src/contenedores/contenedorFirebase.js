@@ -8,19 +8,20 @@ export class Contenedor {
     this.db;
     this.collection = collection;
     this.query;
+    this.admin = admin;
   }
 
   async init() {
     try {
       if (admin.apps.length === 0) {
-        await admin.initializeApp({
+          admin.initializeApp({
           credential: admin.credential.cert(this.serviceAccount),
           url: this.url,
         });
         console.log("Firestore connected");
       }
-      this.db = await admin.firestore();
-      this.query = await this.db.collection(this.collection);
+      this.db = admin.firestore()
+      this.query = this.db.collection(this.collection);
     } catch (err) {
       console.log("Error on connect", err);
     }
@@ -29,22 +30,55 @@ export class Contenedor {
   async save(element) {
     try {
       this.asignadorDeId++;
-      let doc = this.query.doc();
-      await doc.create({
+      let doc = this.query.doc(`${this.asignadorDeId}`);
+      const newElement = {
         ...element,
         id: this.asignadorDeId,
         timestamp: Date().toLocaleString(),
-      });
-      return element;
+      };
+      await doc.create(newElement);
+      return newElement;
     } catch (err) {
       console.log(err, "error on save");
       this.asignadorDeId--;
       return;
     }
   }
-  async read(id) {}
+  async read(id) {
+    try {
+      if (id) {
+        const product = await this.query.doc(`${id}`).get();
+        if (product.empty) return;
+        return product.data();
+      } else {
+        const products = await this.query.get();
+        return products.docs.map((doc) => doc.data());
+      }
+    } catch (err) {
+      return;
+    }
+  }
 
-  async update(element, id) {}
+  async update(element, id) {
+    try {
+      const product = this.query.doc(`${id}`);
+      if (!product) return;
+      await product.update({ ...element });
+      const newProd = await this.query.doc(`${id}`).get();
+      return newProd.data();
+    } catch (err) {
+      return;
+    }
+  }
 
-  async delete(id) {}
+  async delete(id) {
+    try {
+      const product = this.query.doc(`${id}`);
+      const deleted = await this.query.doc(`${id}`).get()
+      await product.delete();
+      return deleted.data();
+    } catch (err) {
+      return;
+    }
+  }
 }

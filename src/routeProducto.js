@@ -10,7 +10,7 @@ const routerP = express.Router()
 routerP.get("/:id?",async (req, res)=>{
     const id = req.params.id
     const prod_s = await instanceProd.read(id)
-    res.send(prod_s? {prods: prod_s}: {Err: "producto inexistente"});
+    res.send(prod_s? {productos: prod_s}: {Err: "producto inexistente"});
 })
 
 routerP.post("/", authMiddle, async(req, res)=>{
@@ -23,13 +23,13 @@ routerP.put("/:id", authMiddle, async(req, res)=>{
     const item = req.body
     const id = req.params.id
     const itemChecked = await instanceProd.update(item, id)
-    res.send(itemChecked? {itemAdded:itemChecked}: {Err:"producto no actualizado"})
+    res.send(itemChecked? {itemUpdated:itemChecked}: {Err:"producto no actualizado"})
 })
 
 routerP.delete("/:id", authMiddle, async(req, res)=>{
     const id = req.params.id
     const itemChecked = await instanceProd.delete(id)
-    res.send(itemChecked? {itemAdded:itemChecked}: {Err:"producto no eliminado"})
+    res.send(itemChecked? {itemDeleted:itemChecked}: {Err:"producto no eliminado"})
 })
 
 export default routerP
